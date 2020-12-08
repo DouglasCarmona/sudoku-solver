@@ -4,9 +4,6 @@ class Sudoku:
         self.grid = grid
         self.n = 9
         self.box = 3
-        self.printsudoku()
-        print('\n')
-
 
     def solvesudoku(self):
         if self.solve(0,0):
