@@ -7,9 +7,9 @@ class Sudoku:
 
     def solvesudoku(self):
         if self.solve(0,0):
-            self.printsudoku()
+            return self.grid
         else:
-            print('There is no solution!')
+            return 'There is no solution!'
     
     def solve(self,r: int, c:int):
 
@@ -17,18 +17,19 @@ class Sudoku:
         if r == self.n:
             return True
         
-        #if all columns were filled, move to next row
+        #if the whole row was filled, move to next row, iterates by row
         if c == self.n:
             return self.solve(r+1,0)
         
+        #if the element is not empty then move to next column in same row
         if not self.isempty(r,c):
             return self.solve(r,c+1)
 
         for num in range(1,10): 
-            if self.isvalid(num,r,c):
+            if self.isvalid(num,r,c): #Check if num is valid according to sudoku rules
                 self.grid[r][c] = num
 
-                if self.solve(r,c+1):
+                if self.solve(r,c+1): #If num is valid then move to next position
                     return True
                     
                 #Backtraking
@@ -80,21 +81,16 @@ class Sudoku:
         return ind_box
 
     
-    def printsudoku(self):
-        for i in range(self.n):
-            if i % 3 == 0 and i!= 0:
-                print(11*'- ')
-            for j in range(self.n):
-                if j % 3== 0 and j!= 0:
-                    print('| ', end = '')
-                if j == 8:
-                    print(self.grid[i][j])
-                else:
-                    print(str(self.grid[i][j]) + ' ', end = '')
-
-
-        
-
-
+    # def printsudoku(self):
+    #     for i in range(self.n):
+    #         if i % 3 == 0 and i!= 0:
+    #             print(11*'- ')
+    #         for j in range(self.n):
+    #             if j % 3== 0 and j!= 0:
+    #                 print('| ', end = '')
+    #             if j == 8:
+    #                 print(self.grid[i][j])
+    #             else:
+    #                 print(str(self.grid[i][j]) + ' ', end = '')
 
     
